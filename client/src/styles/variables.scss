@@ -1,0 +1,6 @@
+@custom-media --lg-devices-screens-more (width >= 1200px);
+@custom-media --lg-devices-screens-less (width <= 1024px);
+@custom-media --md-devices-desktops-less (width <= 992px);
+@custom-media --sm-devices-tablets-less (width <= 768px);
+@custom-media --xs-devices-phones-less (width <= 480px);
+@custom-media --custom-phones-less (width <= 320px);
