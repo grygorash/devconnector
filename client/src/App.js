@@ -1,34 +1,70 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import jwt_decode from 'jwt-decode';
 
-import Header from './componnents/layout/Header';
-import Landing from './componnents/layout/Landing';
-import Register from './componnents/auth/Register';
-import Login from './componnents/auth/Login';
-import Footer from './componnents/layout/Footer';
+import store from './store';
+import setAuthToken from './utils/setAuthToken';
+import { logoutUser, setCurrentUser } from './actions/authActions';
+import { clearCurrentProfile } from './actions/profileActions';
+
+import PrivateRoute from './components/common/PrivateRoute';
+
+import Header from './components/layout/Header';
+import Landing from './components/layout/Landing';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import Dashboard from './components/dashboard/Dashboard';
+import CreateEditProfile from './components/create-edit-profile/CreateEditProfile';
+import Footer from './components/layout/Footer';
 
 import './App.css';
+
+// Check for token
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  setAuthToken(localStorage.jwtToken);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(localStorage.jwtToken);
+  // Set user and isAuthenticated
+  store.dispatch(setCurrentUser(decoded));
+  // Check for expire token
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    // Logout user
+    store.dispatch(logoutUser());
+    // Clear current Profile
+    store.dispatch(clearCurrentProfile());
+    //Redirect to login
+    window.location.href = '/login';
+  }
+}
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <div className="App">
-          <Header />
-          <Route exact
-                 path="/"
-                 component={Landing} />
-          <div className="container">
-            <Route exact
-                   path="/login"
-                   component={Login} />
-            <Route exact
-                   path="/register"
-                   component={Register} />
+      <Provider store={store}>
+        <Router>
+          <div className="App">
+            <Header />
+            <Route exact path="/" component={Landing} />
+            <div className="container">
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Switch>
+                <PrivateRoute path="/dashboard" component={Dashboard} />
+              </Switch>
+              <Switch>
+                <PrivateRoute path="/create-profile" component={CreateEditProfile} />
+              </Switch>
+              <Switch>
+                <PrivateRoute path="/edit-profile" component={CreateEditProfile} />
+              </Switch>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </Router>
+        </Router>
+      </Provider>
     );
   }
 }

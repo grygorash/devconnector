@@ -6,11 +6,13 @@ img {
   position: relative;
   background: url('img/showcase.jpg') center no-repeat;
   background-size: cover;
-  height: calc(100vh - 112px);
 }
 
-.landing-inner {
-  padding-top: 80px;
+.landing,
+.register,
+.login {
+  min-height: calc(100vh - 112px);
+  padding: 100px 0 20px;
 }
 
 .dark-overlay {
@@ -20,6 +22,13 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
+  padding: 100px 0 20px;
+}
+
+.dashboard,
+.create-profile {
+  min-height: calc(100vh - 112px);
+  padding: 20px 0;
 }
 
 .card-form {
@@ -33,4 +42,52 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+.user-avatar {
+  width: 25px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.nav-item {
+  align-items: center;
+  display: flex;
+}
+
+.custom-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.spinner {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 1px;
+  border-radius: 50%;
+  border: 5px solid;
+  border-color: #343a40 transparent #343a40 transparent;
+  animation: spinner-animation 1.2s linear infinite;
+}
+
+@keyframes spinner-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
