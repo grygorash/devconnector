@@ -40,14 +40,14 @@ const PostFeed = ({posts, auth, deletePost, addLike, addUnlike}) => {
                    <div className="col-md-10">
                      <p className="lead">{post.text}</p>
                      <button type="button"
-                             className="btn btn-light mr-1"
+                             className={classnames('btn btn-light mr-1', {'disabled': post.likes.filter(like => like.user === auth.user.id).length > 0})}
                              onClick={() => onLikeClick(post._id)}>
                        <FaThumbsUp
                          className={classnames('mb-1', {'text-info': post.likes.filter(like => like.user === auth.user.id).length > 0})} />
                        <span className="badge badge-light ml-2">{post.likes.length}</span>
                      </button>
                      <button type="button"
-                             className="btn btn-light mr-1"
+                             className={classnames('btn btn-light mr-1', {'disabled': post.dislikes.filter(like => like.user === auth.user.id).length > 0})}
                              onClick={() => onDislike(post._id)}>
                        <FaThumbsDown
                          className={classnames('mb-1', {'text-danger': post.dislikes.filter(like => like.user === auth.user.id).length > 0})} />

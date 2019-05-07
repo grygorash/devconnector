@@ -80,6 +80,10 @@ img {
   outline: none;
 }
 
+.btn.disabled {
+  pointer-events: none;
+}
+
 .spinner {
   display: inline-block;
   width: 64px;
