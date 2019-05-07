@@ -101,13 +101,21 @@ router.post('/like/:id',
                   Post.findById(req.params.id)
                     .then(post => {
                       if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
-                        return res.status(400).json({alredyliked: 'User already liked this post'});
+                        return res.json(post);
+                      } else {
+                        // Add user id to likes array
+                        post.likes.unshift({user: req.user.id});
+
+                        if (post.dislikes.filter(dislike => dislike.user.toString() === req.user.id).length > 0) {
+                          // Get remove index
+                          const removeIndex = post.dislikes.map(item => item.user.toString()).indexOf(req.user.id);
+
+                          // Splice out of array
+                          post.dislikes.splice(removeIndex, 1);
+                        }
+
+                        post.save().then(post => res.json(post));
                       }
-
-                      // Add user id to likes array
-                      post.likes.unshift({user: req.user.id});
-
-                      post.save().then(post => res.json(post));
                     })
                     .catch(err => res.status(404).json({postnotfound: 'No post found'}));
                 });
@@ -124,18 +132,22 @@ router.post('/unlike/:id',
                 .then(profile => {
                   Post.findById(req.params.id)
                     .then(post => {
-                      if (post.likes.filter(like => like.user.toString() === req.user.id).length === 0) {
-                        return res.status(400).json({notliked: 'You have not yet liked this post'});
+                      if (post.dislikes.filter(dislike => dislike.user.toString() === req.user.id).length > 0) {
+                        return res.json(post);
+                      } else {
+                        // Add user id to dislikes array
+                        post.dislikes.unshift({user: req.user.id});
+
+                        if (post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+                          // Get remove index
+                          const removeIndex = post.likes.map(item => item.user.toString()).indexOf(req.user.id);
+
+                          // Splice out of array
+                          post.likes.splice(removeIndex, 1);
+                        }
+
+                        post.save().then(post => res.json(post));
                       }
-
-                      // Get remove index
-                      const removeIndex = post.likes.map(item => item.user.toString()).indexOf(req.user.id);
-
-                      // Splice out of array
-                      post.likes.splice(removeIndex, 1);
-
-                      //Save
-                      post.save().then(post => res.json(post));
                     })
                     .catch(err => res.status(404).json({postnotfound: 'No post found'}));
                 });

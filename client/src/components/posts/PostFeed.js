@@ -49,7 +49,9 @@ const PostFeed = ({posts, auth, deletePost, addLike, addUnlike}) => {
                      <button type="button"
                              className="btn btn-light mr-1"
                              onClick={() => onDislike(post._id)}>
-                       <FaThumbsDown />
+                       <FaThumbsDown
+                         className={classnames('mb-1', {'text-danger': post.dislikes.filter(like => like.user === auth.user.id).length > 0})} />
+                       <span className="badge badge-light ml-2">{post.dislikes.length}</span>
                      </button>
                      <Link to={`/post/${post._id}`}
                            className="btn btn-info mr-1">
