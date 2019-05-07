@@ -5,11 +5,10 @@ import Moment from 'react-moment';
 
 import { deleteExperience } from '../../actions/profileActions';
 
-const Experience = props => {
-  const {experience} = props.profile.profile;
+const Experience = ({experience, deleteExperience}) => {
 
   const onDeleteClick = id => {
-    props.deleteExperience(id);
+    deleteExperience(id);
   };
 
   return (
@@ -45,12 +44,8 @@ const Experience = props => {
 };
 
 Experience.propTypes = {
-  profile: PropTypes.object.isRequired,
+  experience: PropTypes.array.isRequired,
   deleteExperience: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
-  profile: state.profile
-});
-
-export default connect(marStateToProps, {deleteExperience})(Experience);
+export default connect(null, {deleteExperience})(Experience);

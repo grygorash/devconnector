@@ -24,7 +24,7 @@ const Dashboard = props => {
           <div className="col-md-12">
             <h1 className="display-4 text-center">Dashboard</h1>
             {profile === null || loading ? <Spinner /> :
-              Object.keys(profile).length > 0 ? <WithProfile /> :
+              Object.keys(profile).length > 0 ? <WithProfile profile={profile}/> :
                 <WithoutProfile />}
           </div>
         </div>

@@ -5,11 +5,10 @@ import Moment from 'react-moment';
 
 import { deleteEducation } from '../../actions/profileActions';
 
-const Education = props => {
-  const {education} = props.profile.profile;
+const Education = ({education, deleteEducation}) => {
 
   const onDeleteClick = id => {
-    props.deleteEducation(id);
+    deleteEducation(id);
   };
 
   return (
@@ -45,12 +44,8 @@ const Education = props => {
 };
 
 Education.propTypes = {
-  profile: PropTypes.object.isRequired,
+  education: PropTypes.array.isRequired,
   deleteEducation: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
-  profile: state.profile
-});
-
-export default connect(marStateToProps, {deleteEducation})(Education);
+export default connect(null, {deleteEducation})(Education);

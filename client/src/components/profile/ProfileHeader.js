@@ -17,54 +17,48 @@ const ProfileHeader = ({profile}) =>
       <p className="lead text-center">{profile.status} {!isEmpty(profile.company) && `at ${profile.company}`}</p>
       {!isEmpty(profile.location) && <p>{profile.location}</p>}
       <p>
-        {!isEmpty(profile.website) ?
-          <a className="text-white p-2"
-             rel="noopener noreferrer"
-             target="_blank"
-             href={profile.website}>
-            <FaGlobe size="2em" />
-          </a> :
-          null}
-        {!isEmpty(profile.social.facebook) ?
-          <a className="text-white p-2"
-             rel="noopener noreferrer"
-             target="_blank"
-             href={profile.social.facebook}>
-            <FaFacebook size="2em" />
-          </a> :
-          null}
-        {!isEmpty(profile.social.linkedin) ?
-          <a className="text-white p-2"
-             rel="noopener noreferrer"
-             target="_blank"
-             href={profile.social.linkedin}>
-            <FaLinkedin size="2em" />
-          </a> :
-          null}
-        {!isEmpty(profile.social.twitter) ?
-          <a className="text-white p-2"
-             rel="noopener noreferrer"
-             target="_blank"
-             href={profile.social.twitter}>
-            <FaTwitter size="2em" />
-          </a> :
-          null}
-        {!isEmpty(profile.social.instagram) ?
-          <a className="text-white p-2"
-             rel="noopener noreferrer"
-             target="_blank"
-             href={profile.social.instagram}>
-            <FaInstagram size="2em" />
-          </a> :
-          null}
-        {!isEmpty(profile.social.youtube) ?
-          <a className="text-white p-2"
-             rel="noopener noreferrer"
-             target="_blank"
-             href={profile.social.youtube}>
-            <FaYoutube size="2em" />
-          </a> :
-          null}
+        {!isEmpty(profile.website) &&
+        <a className="text-white p-2"
+           rel="noopener noreferrer"
+           target="_blank"
+           href={profile.website}>
+          <FaGlobe size="2em" />
+        </a>}
+        {!isEmpty(profile.social.facebook) &&
+        <a className="text-white p-2"
+           rel="noopener noreferrer"
+           target="_blank"
+           href={profile.social.facebook}>
+          <FaFacebook size="2em" />
+        </a>}
+        {!isEmpty(profile.social.linkedin) &&
+        <a className="text-white p-2"
+           rel="noopener noreferrer"
+           target="_blank"
+           href={profile.social.linkedin}>
+          <FaLinkedin size="2em" />
+        </a>}
+        {!isEmpty(profile.social.twitter) &&
+        <a className="text-white p-2"
+           rel="noopener noreferrer"
+           target="_blank"
+           href={profile.social.twitter}>
+          <FaTwitter size="2em" />
+        </a>}
+        {!isEmpty(profile.social.instagram) &&
+        <a className="text-white p-2"
+           rel="noopener noreferrer"
+           target="_blank"
+           href={profile.social.instagram}>
+          <FaInstagram size="2em" />
+        </a>}
+        {!isEmpty(profile.social.youtube) &&
+        <a className="text-white p-2"
+           rel="noopener noreferrer"
+           target="_blank"
+           href={profile.social.youtube}>
+          <FaYoutube size="2em" />
+        </a>}
       </p>
     </div>
   </div>;

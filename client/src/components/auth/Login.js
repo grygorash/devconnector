@@ -15,8 +15,7 @@ class Login extends PureComponent {
 
   state = {
     email: '',
-    password: '',
-    errors: {}
+    password: ''
   };
 
   static getDerivedStateFromProps(props) {
@@ -33,7 +32,7 @@ class Login extends PureComponent {
     const {email} = this.state;
     const {password} = this.state;
 
-    this.props.loginUser({email, password,}, this.props.history);
+    this.props.loginUser({email, password,});
   };
 
   render() {

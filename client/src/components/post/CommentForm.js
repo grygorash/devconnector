@@ -26,8 +26,7 @@ class CommentForm extends PureComponent {
     e.preventDefault();
     const {postId} = this.props;
     const {text} = this.state;
-    const {name} = this.props.auth.user;
-    const {avatar} = this.props.auth.user;
+    const {name, avatar} = this.props.auth.user;
 
     this.props.addComment(postId, {text, name, avatar});
     this.setState({text: ''});

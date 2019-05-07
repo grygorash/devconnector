@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 import { clearErrors } from '../../actions/authActions';
 
-const GuestLinks = props => {
+const GuestLinks = ({errors, clearErrors}) => {
   const onClearErrors = () => {
-    if (Object.keys(props.errors).length > 0) {
-      props.clearErrors(props.errors);
+    if (Object.keys(errors).length > 0) {
+      clearErrors(errors);
     }
   };
 
@@ -25,8 +25,8 @@ const GuestLinks = props => {
 };
 
 GuestLinks.propTypes = {
-  clearErrors: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

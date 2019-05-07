@@ -24,8 +24,7 @@ class PostForm extends PureComponent {
   onSubmit = e => {
     e.preventDefault();
     const {text} = this.state;
-    const {name} = this.props.auth.user;
-    const {avatar} = this.props.auth.user;
+    const {name,avatar} = this.props.auth.user;
 
     this.props.addPost({text, name, avatar});
     this.setState({text: ''});

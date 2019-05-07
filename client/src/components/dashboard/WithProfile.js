@@ -9,24 +9,24 @@ import ProfileActions from './ProfileActions';
 import Experience from './Experience';
 import Education from './Education';
 
-const WithProfile = props => {
-  const {profile} = props.profile;
+const WithProfile = ({profile, errors, deleteAccount, clearErrors}) => {
+  const {experience, education, handle} = profile;
 
   const onDeleteClick = () => {
-    props.deleteAccount();
-    if (Object.keys(props.errors).length > 0) {
-      props.clearErrors(props.errors);
+    deleteAccount();
+    if (Object.keys(errors).length > 0) {
+      clearErrors(errors);
     }
   };
 
   return (
     <div>
       <p className="lead text-muted">
-        Welcome, <Link to={`/profile/${profile.handle}`}>{profile.handle}</Link>
+        Welcome, <Link to={`/profile/${handle}`}>{handle}</Link>
       </p>
       <ProfileActions />
-      {profile.experience.length ? <Experience /> : null}
-      {profile.education.length ? <Education /> : null}
+      {experience.length ? <Experience experience={experience} /> : null}
+      {education.length ? <Education education={education} /> : null}
       <div style={{marginTop: '60px'}}>
         <button onClick={onDeleteClick} className="btn btn-danger">Delete My Account</button>
       </div>
@@ -42,7 +42,6 @@ WithProfile.propTypes = {
 };
 
 const marStateToProps = state => ({
-  profile: state.profile,
   errors: state.errors
 });
 

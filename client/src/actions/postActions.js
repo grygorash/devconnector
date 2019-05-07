@@ -49,6 +49,7 @@ export const addPost = postData => dispatch => {
                        type: ADD_POST,
                        payload: res.data
                      }))
+    .then(dispatch(clearErrors()))
     .catch(err =>
              dispatch({
                         type: GET_ERRORS,

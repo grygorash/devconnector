@@ -6,15 +6,15 @@ import { Link, withRouter } from 'react-router-dom';
 import { clearErrors, logoutUser } from '../../actions/authActions';
 import { clearCurrentProfile } from '../../actions/profileActions';
 
-const AuthLinks = (props) => {
-  const {user} = props.auth;
+const AuthLinks = ({auth, errors, history, logoutUser, clearCurrentProfile, clearErrors}) => {
+  const {avatar, name} = auth.user;
 
   const onLogoutClick = e => {
     e.preventDefault();
-    props.clearCurrentProfile();
-    props.logoutUser(props.history);
-    if (Object.keys(props.errors).length > 0) {
-      props.clearErrors(props.errors);
+    clearCurrentProfile();
+    logoutUser(history);
+    if (Object.keys(errors).length > 0) {
+      clearErrors(errors);
     }
   };
 
@@ -22,14 +22,14 @@ const AuthLinks = (props) => {
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
         <Link to="/feed"
-          className="nav-link custom-btn mr-3">
+              className="nav-link custom-btn mr-3">
           Posts Feed
         </Link>
       </li>
       <li className="nav-item">
         <img className="user-avatar"
-             src={user.avatar}
-             alt={user.name} />
+             src={avatar}
+             alt={name} />
         <button className="nav-link custom-btn"
                 onClick={onLogoutClick}>Sign out
         </button>
@@ -40,8 +40,8 @@ const AuthLinks = (props) => {
 
 AuthLinks.propTypes = {
   auth: PropTypes.object.isRequired,
-  logoutUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
+  logoutUser: PropTypes.func.isRequired,
   clearCurrentProfile: PropTypes.func.isRequired,
   clearErrors: PropTypes.func.isRequired
 };

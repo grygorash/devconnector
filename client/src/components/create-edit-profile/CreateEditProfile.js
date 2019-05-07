@@ -54,43 +54,33 @@ class CreateEditProfile extends PureComponent {
     }
 
     if (nextProps.profile.profile) {
-      const {profile} = nextProps.profile;
+      const {handle, company, website, location, status, skills, githubusername, bio, social} = nextProps.profile.profile;
+
       // Set component field state
       this.setState({
-                      handle: profile.handle ? profile.handle : '',
-                      company: profile.company ? profile.company : '',
-                      website: profile.website ? profile.website : '',
-                      location: profile.location ? profile.location : '',
-                      status: profile.status ? profile.status : '',
-                      skills: profile.skills ? profile.skills.join(',') : '',
-                      githubusername: profile.githubusername ? profile.githubusername : '',
-                      bio: profile.bio ? profile.bio : '',
-                      twitter: profile.social && profile.social.twitter ? profile.social.twitter : '',
-                      facebook: profile.social && profile.social.facebook ? profile.social.facebook : '',
-                      linkedin: profile.social && profile.social.linkedin ? profile.social.linkedin : '',
-                      youtube: profile.social && profile.social.youtube ? profile.social.youtube : '',
-                      instagram: profile.social && profile.social.instagram ? profile.social.instagram : '',
+                      handle: handle ? handle : '',
+                      company: company ? company : '',
+                      website: website ? website : '',
+                      location: location ? location : '',
+                      status: status ? status : '',
+                      skills: skills ? skills.join(',') : '',
+                      githubusername: githubusername ? githubusername : '',
+                      bio: bio ? bio : '',
+                      twitter: social && social.twitter ? social.twitter : '',
+                      facebook: social && social.facebook ? social.facebook : '',
+                      linkedin: social && social.linkedin ? social.linkedin : '',
+                      youtube: social && social.youtube ? social.youtube : '',
+                      instagram: social && social.instagram ? social.instagram : '',
                     });
     }
   }
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.createProfile({
-                               handle: this.state.handle,
-                               company: this.state.company,
-                               website: this.state.website,
-                               location: this.state.location,
-                               status: this.state.status,
-                               skills: this.state.skills,
-                               githubusername: this.state.githubusername,
-                               bio: this.state.bio,
-                               twitter: this.state.twitter,
-                               facebook: this.state.facebook,
-                               linkedin: this.state.linkedin,
-                               youtube: this.state.youtube,
-                               instagram: this.state.instagram
-                             }, this.props.history);
+    const {handle, company, website, location, status, skills, githubusername, bio, twitter, facebook, linkedin, youtube, instagram} = this.state;
+    const {history} = this.props;
+
+    this.props.createProfile({handle, company, website, location, status, skills, githubusername, bio, twitter, facebook, linkedin, youtube, instagram}, history);
   };
 
   onChange = ({target}) => {

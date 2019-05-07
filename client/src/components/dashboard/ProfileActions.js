@@ -21,4 +21,5 @@ const ProfileActions = () =>
       Add Education
     </Link>
   </div>;
+
 export default ProfileActions;

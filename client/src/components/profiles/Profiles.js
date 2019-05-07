@@ -8,13 +8,13 @@ import Spinner from '../common/Spinner';
 import ProfileItem from './ProfileItem';
 
 const methods = {
-  componentDidMount(props) {
-    props.getProfiles();
+  componentDidMount({getProfiles}) {
+    getProfiles();
   }
 };
 
-const Profiles = props => {
-  const {profiles, loading} = props.profile;
+const Profiles = ({profile}) => {
+  const {profiles, loading} = profile;
 
   return (
     <div className="profiles">

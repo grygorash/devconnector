@@ -7,19 +7,18 @@ import { FaThumbsDown, FaThumbsUp, FaTimes } from 'react-icons/fa';
 
 import { addLike, addUnlike, deletePost } from '../../actions/postActions';
 
-const PostFeed = props => {
-  const {posts, auth} = props;
+const PostFeed = ({posts, auth, deletePost, addLike, addUnlike}) => {
 
   const onDeleteClick = id => {
-    props.deletePost(id);
+    deletePost(id);
   };
 
   const onLikeClick = id => {
-    props.addLike(id, 'noReload');
+    addLike(id, 'noReload');
   };
 
   const onDislike = id => {
-    props.addUnlike(id, 'noReload');
+    addUnlike(id, 'noReload');
   };
 
   return (

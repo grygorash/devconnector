@@ -38,15 +38,10 @@ class AddExperience extends PureComponent {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.addExperience({
-                               company: this.state.company,
-                               title: this.state.title,
-                               location: this.state.location,
-                               from: this.state.from,
-                               to: this.state.to,
-                               current: this.state.current,
-                               description: this.state.description
-                             }, this.props.history);
+    const {company, title, location, from, to, current, description} = this.state;
+    const {history} = this.props;
+
+    this.props.addExperience({company, title, location, from, to, current, description}, history);
   };
 
   render() {

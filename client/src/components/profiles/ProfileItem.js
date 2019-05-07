@@ -5,7 +5,6 @@ import { FaCheck } from 'react-icons/fa';
 
 import isEmpty from '../../validation/is-empty';
 
-
 const ProfileItem = ({profile}) =>
   <div className="card card-body bg-light mb-3">
     <div className="row">

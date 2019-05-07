@@ -18,7 +18,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login  - Get user token
-export const loginUser = (userData, history) => dispatch => {
+export const loginUser = userData => dispatch => {
   axios
     .post('/api/users/login', userData)
     .then(res => {
@@ -33,7 +33,6 @@ export const loginUser = (userData, history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
-    // .then(history.push('/dashboard'))
     .catch(err =>
              dispatch({
                         type: GET_ERRORS,

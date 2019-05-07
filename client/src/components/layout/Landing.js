@@ -7,9 +7,9 @@ import lifecycle from 'react-pure-lifecycle';
 import { clearErrors } from '../../actions/authActions';
 
 const methods = {
-  componentDidMount(props) {
-    if (props.auth.isAuthenticated) {
-      props.history.push('/dashboard');
+  componentDidMount({auth, history}) {
+    if (auth.isAuthenticated) {
+      history.push('/dashboard');
     }
   }
 };
@@ -42,9 +42,9 @@ const Landing = ({errors, clearErrors}) => {
 };
 
 Landing.propTypes = {
-  clearErrors: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  clearErrors: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -17,18 +17,8 @@ class Register extends PureComponent {
     name: '',
     email: '',
     password: '',
-    password2: '',
-    errors: {}
+    password2: ''
   };
-
-  static getDerivedStateFromProps(props, state) {
-    if (props.errors !== state.errors) {
-      return {
-        errors: props.errors
-      };
-    }
-    return null;
-  }
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
@@ -42,16 +32,15 @@ class Register extends PureComponent {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.registerUser({
-                              name: this.state.name,
-                              email: this.state.email,
-                              password: this.state.password,
-                              password2: this.state.password2,
-                            }, this.props.history);
+    const {name, email, password, password2} = this.state;
+    const {history} = this.props;
+
+    this.props.registerUser({name, email, password, password2,}, history);
   };
 
   render() {
-    const {name, email, password, password2, errors} = this.state;
+    const {name, email, password, password2} = this.state;
+    const {errors} = this.props;
     const {onChange, onSubmit} = this;
 
     return (

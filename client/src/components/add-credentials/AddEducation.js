@@ -38,15 +38,10 @@ class AddEducation extends PureComponent {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.addEducation({
-                              school: this.state.school,
-                              degree: this.state.degree,
-                              fieldofstudy: this.state.fieldofstudy,
-                              from: this.state.from,
-                              to: this.state.to,
-                              current: this.state.current,
-                              description: this.state.description
-                            }, this.props.history);
+    const {school, degree, fieldofstudy, from, to, current, description} = this.state;
+    const {history} = this.props;
+
+    this.props.addEducation({school, degree, fieldofstudy, from, to, current, description}, history);
   };
 
   render() {
