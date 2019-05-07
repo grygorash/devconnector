@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 
 import { clearErrors, logoutUser } from '../../actions/authActions';
 import { clearCurrentProfile } from '../../actions/profileActions';
@@ -11,7 +12,7 @@ const AuthLinks = (props) => {
   const onLogoutClick = e => {
     e.preventDefault();
     props.clearCurrentProfile();
-    props.logoutUser();
+    props.logoutUser(props.history);
     if (Object.keys(props.errors).length > 0) {
       props.clearErrors(props.errors);
     }
@@ -19,6 +20,12 @@ const AuthLinks = (props) => {
 
   return (
     <ul className="navbar-nav ml-auto">
+      <li className="nav-item">
+        <Link to="/feed"
+          className="nav-link custom-btn mr-3">
+          Posts Feed
+        </Link>
+      </li>
       <li className="nav-item">
         <img className="user-avatar"
              src={user.avatar}
@@ -44,4 +51,4 @@ const marStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(marStateToProps, {logoutUser, clearCurrentProfile, clearErrors})(AuthLinks);
+export default connect(marStateToProps, {logoutUser, clearCurrentProfile, clearErrors})(withRouter(AuthLinks));

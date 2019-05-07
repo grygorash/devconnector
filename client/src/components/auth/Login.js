@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { loginUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
-class Login extends Component {
+class Login extends PureComponent {
   static propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
@@ -19,39 +19,26 @@ class Login extends Component {
     errors: {}
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.auth.isAuthenticated) {
-      nextProps.history.push('/dashboard');
-    }
-
-    if (nextProps.errors !== prevState.errors) {
-      return {
-        errors: nextProps.errors
-      };
-    }
+  static getDerivedStateFromProps(props) {
+    props.auth.isAuthenticated && props.history.push('/dashboard');
     return null;
   }
 
-  componentDidMount() {
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
-    }
-  }
-
-  onChange = e => {
-    this.setState({[e.target.name]: e.target.value});
+  onChange = ({target}) => {
+    this.setState({[target.name]: target.value});
   };
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.loginUser({
-                           email: this.state.email,
-                           password: this.state.password,
-                         });
+    const {email} = this.state;
+    const {password} = this.state;
+
+    this.props.loginUser({email, password,}, this.props.history);
   };
 
   render() {
-    const {email, password, errors} = this.state;
+    const {email, password} = this.state;
+    const {errors} = this.props;
     const {onChange, onSubmit} = this;
 
     return (

@@ -10,7 +10,8 @@ img {
 
 .landing,
 .register,
-.login {
+.login,
+.not-found {
   min-height: calc(100vh - 112px);
   padding: 100px 0 20px;
 }
@@ -26,9 +27,27 @@ img {
 }
 
 .dashboard,
-.create-profile {
+.create-profile,
+.add-experience,
+.add-education,
+.profiles,
+.profile-view,
+.feed,
+.post {
   min-height: calc(100vh - 112px);
   padding: 20px 0;
+}
+
+.experience-content .row,
+.education-content .row {
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.experience-content [class*='col-'],
+.education-content [class*='col-'] {
+  padding: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .card-form {

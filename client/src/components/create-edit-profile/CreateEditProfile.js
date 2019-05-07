@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from 'react-icons/fa';
 
 import { createProfile, getCurrentProfile } from '../../actions/profileActions';
@@ -12,7 +12,7 @@ import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import Spinner from '../common/Spinner';
 
-class CreateEditProfile extends Component {
+class CreateEditProfile extends PureComponent {
   static propTypes = {
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
@@ -35,8 +35,7 @@ class CreateEditProfile extends Component {
     facebook: '',
     linkedin: '',
     youtube: '',
-    instagram: '',
-    errors: {},
+    instagram: ''
   };
 
   componentDidMount() {
@@ -46,11 +45,8 @@ class CreateEditProfile extends Component {
     }
   }
 
+  // @TODO
   componentWillReceiveProps(nextProps) {
-    if (nextProps.errors) {
-      this.setState({errors: nextProps.errors});
-    }
-
     if (nextProps.profile.profile &&
       Object.keys(nextProps.profile.profile).length > 0 &&
       nextProps.location.pathname === '/create-profile') {
@@ -78,44 +74,6 @@ class CreateEditProfile extends Component {
     }
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if (nextProps.errors !== prevState.errors) {
-  //     return {
-  //       errors: nextProps.errors
-  //     };
-  //   }
-  //
-  //   if (nextProps.profile.profile && Object.keys(nextProps.profile.profile).length > 0 &&
-  //     nextProps.location.pathname === '/create-profile') {
-  //     nextProps.history.push('/edit-profile');
-  //   }
-  //
-  //   if (nextProps.profile.profile) {
-  //     const {profile} = nextProps.profile;
-  //     // Set component fields state
-  //     const state = {
-  //       handle: profile.handle,
-  //       company: profile.company,
-  //       website: profile.website,
-  //       location: profile.location,
-  //       status: profile.status,
-  //       skills: profile.skills.join(','),
-  //       githubUsername: profile.githubusername,
-  //       bio: profile.bio,
-  //       twitter: profile.social.twitter,
-  //       facebook: profile.social.facebook,
-  //       linkedin: profile.social.linkedin,
-  //       youtube: profile.social.youtube,
-  //       instagram: profile.social.instagram
-  //     };
-  //     console.log('--->', prevState.profile);
-  //     if (prevState.profile === state) {
-  //       return state;
-  //     }
-  //   }
-  //   return null;
-  // }
-
   onSubmit = e => {
     e.preventDefault();
     this.props.createProfile({
@@ -135,8 +93,8 @@ class CreateEditProfile extends Component {
                              }, this.props.history);
   };
 
-  onChange = e => {
-    this.setState({[e.target.name]: e.target.value});
+  onChange = ({target}) => {
+    this.setState({[target.name]: target.value});
   };
 
   setSocialInputs = () => {
@@ -158,11 +116,10 @@ class CreateEditProfile extends Component {
       facebook,
       linkedin,
       youtube,
-      instagram,
-      errors
+      instagram
     } = this.state;
     const {profile} = this.props.profile;
-    const {history} = this.props;
+    const {history, errors} = this.props;
     const {onSubmit, onChange, setSocialInputs} = this;
 
     // Select options for status
@@ -184,6 +141,7 @@ class CreateEditProfile extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
+                <Link to="/dashboard" className="btn btn-light">Go Back</Link>
                 <h1 className="display-4 text-center">{profile && Object.keys(profile).length > 0 ? 'Edit Profile' :
                   'Create Your Profile'}</h1>
                 {profile && Object.keys(profile).length > 0 ? null :

@@ -17,7 +17,7 @@ const Header = ({auth}) =>
         <div className="collapse navbar-collapse" id="mobile-nav">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/profile/all">Developers</Link>
+              <Link className="nav-link" to="/profiles">Developers</Link>
             </li>
           </ul>
           {auth.isAuthenticated ? <AuthLinks /> : <GuestLinks />}

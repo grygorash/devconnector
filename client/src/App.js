@@ -14,8 +14,15 @@ import Header from './components/layout/Header';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Profiles from './components/profiles/Profiles';
+import Profile from './components/profile/Profile';
 import Dashboard from './components/dashboard/Dashboard';
 import CreateEditProfile from './components/create-edit-profile/CreateEditProfile';
+import AddExperience from './components/add-credentials/AddExperience';
+import AddEducation from './components/add-credentials/AddEducation';
+import Posts from './components/posts/Posts';
+import Post from './components/post/Post';
+import NotFound from './components/not-found/NotFound';
 import Footer from './components/layout/Footer';
 
 import './App.css';
@@ -47,19 +54,61 @@ class App extends Component {
         <Router>
           <div className="App">
             <Header />
-            <Route exact path="/" component={Landing} />
+            <Route
+              exact
+              path="/"
+              component={Landing} />
             <div className="container">
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
+              <Route
+                path="/login"
+                component={Login} />
+              <Route
+                path="/register"
+                component={Register} />
+              <Route
+                path="/profiles"
+                component={Profiles} />
+              <Route
+                path="/profile/:handle"
+                component={Profile} />
               <Switch>
-                <PrivateRoute path="/dashboard" component={Dashboard} />
+                <PrivateRoute
+                  path="/dashboard"
+                  component={Dashboard} />
               </Switch>
               <Switch>
-                <PrivateRoute path="/create-profile" component={CreateEditProfile} />
+                <PrivateRoute
+                  path="/create-profile"
+                  component={CreateEditProfile} />
               </Switch>
               <Switch>
-                <PrivateRoute path="/edit-profile" component={CreateEditProfile} />
+                <PrivateRoute
+                  path="/edit-profile"
+                  component={CreateEditProfile} />
               </Switch>
+              <Switch>
+                <PrivateRoute
+                  path="/add-experience"
+                  component={AddExperience} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  path="/add-education"
+                  component={AddEducation} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  path="/feed"
+                  component={Posts} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  path="/post/:id"
+                  component={Post} />
+              </Switch>
+              <Route
+                path="/not-found"
+                component={NotFound} />
             </div>
             <Footer />
           </div>

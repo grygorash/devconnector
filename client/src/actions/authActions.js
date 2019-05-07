@@ -18,7 +18,7 @@ export const registerUser = (userData, history) => dispatch => {
 };
 
 // Login  - Get user token
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, history) => dispatch => {
   axios
     .post('/api/users/login', userData)
     .then(res => {
@@ -33,6 +33,7 @@ export const loginUser = userData => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
     })
+    // .then(history.push('/dashboard'))
     .catch(err =>
              dispatch({
                         type: GET_ERRORS,
@@ -50,11 +51,12 @@ export const setCurrentUser = decoded => {
 };
 
 // Log user out
-export const logoutUser = () => dispatch => {
+export const logoutUser = history => dispatch => {
   // Remove token from localStorage
   localStorage.removeItem('jwtToken');
   // Remove auth header for future requests
   setAuthToken(false);
+  history.push('/');
   // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
@@ -62,7 +64,6 @@ export const logoutUser = () => dispatch => {
 // Clear errors
 export const clearErrors = () => {
   return {
-    type: CLEAR_ERRORS,
-    payload: {}
+    type: CLEAR_ERRORS
   };
 };

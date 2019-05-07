@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../actions/authActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 
-class Register extends Component {
+class Register extends PureComponent {
   static propTypes = {
     registerUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
@@ -21,10 +21,10 @@ class Register extends Component {
     errors: {}
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.errors !== prevState.errors) {
+  static getDerivedStateFromProps(props, state) {
+    if (props.errors !== state.errors) {
       return {
-        errors: nextProps.errors
+        errors: props.errors
       };
     }
     return null;
@@ -36,8 +36,8 @@ class Register extends Component {
     }
   }
 
-  onChange = e => {
-    this.setState({[e.target.name]: e.target.value});
+  onChange = ({target}) => {
+    this.setState({[target.name]: target.value});
   };
 
   onSubmit = e => {

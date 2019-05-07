@@ -150,7 +150,7 @@ router.post('/comment/:id',
             (req, res) => {
               const {errors, isValid} = validatePostInput(req.body);
 
-              // Check validation
+              // Check Validation
               if (!isValid) {
                 // If any errors, send 400 with errors object
                 return res.status(400).json(errors);
@@ -194,7 +194,7 @@ router.delete('/comment/:id/:comment_id',
                     // Splice comment out of array
                     post.comments.splice(removeIndex, 1);
 
-                    post.save().then(post => res.json(post))
+                    post.save().then(post => res.json(post));
                   })
                   .catch(err => res.status(404).json({postnotfound: 'No post found'}));
               }

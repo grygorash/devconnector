@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
-import { addExperience } from '../../actions/profileActions';
+import { addEducation } from '../../actions/profileActions';
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 
-class AddExperience extends PureComponent {
+class AddEducation extends PureComponent {
   static propTypes = {
     profile: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired,
-    addExperience: PropTypes.func.isRequired
+    addEducation: PropTypes.func.isRequired
   };
 
   state = {
-    company: '',
-    title: '',
-    location: '',
+    school: '',
+    degree: '',
+    fieldofstudy: '',
     from: '',
     to: '',
     current: false,
@@ -38,22 +38,22 @@ class AddExperience extends PureComponent {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.addExperience({
-                               company: this.state.company,
-                               title: this.state.title,
-                               location: this.state.location,
-                               from: this.state.from,
-                               to: this.state.to,
-                               current: this.state.current,
-                               description: this.state.description
-                             }, this.props.history);
+    this.props.addEducation({
+                              school: this.state.school,
+                              degree: this.state.degree,
+                              fieldofstudy: this.state.fieldofstudy,
+                              from: this.state.from,
+                              to: this.state.to,
+                              current: this.state.current,
+                              description: this.state.description
+                            }, this.props.history);
   };
 
   render() {
     const {
-      company,
-      title,
-      location,
+      school,
+      degree,
+      fieldofstudy,
       from,
       to,
       current,
@@ -64,33 +64,33 @@ class AddExperience extends PureComponent {
     const {onSubmit, onChange, onCheck} = this;
 
     return (
-      <div className="add-experience">
+      <div className="add-education">
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
               <Link to="/dashboard" className="btn btn-light">Go Back</Link>
-              <h1 className="display-4 text-center">Add Experience</h1>
-              <p className="lead text-center">Add any job or position that you have had in the past or current</p>
+              <h1 className="display-4 text-center">Add Education</h1>
+              <p className="lead text-center">Add any school, bootcamp, etc that you have attended</p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={onSubmit}>
                 <TextFieldGroup
-                  placeholder="* Company"
-                  name="company"
-                  value={company}
+                  placeholder="* School"
+                  name="school"
+                  value={school}
                   onChange={onChange}
-                  error={errors.company} />
+                  error={errors.school} />
                 <TextFieldGroup
-                  placeholder="* Job Title"
-                  name="title"
-                  value={title}
+                  placeholder="* Degree or Certification"
+                  name="degree"
+                  value={degree}
                   onChange={onChange}
-                  error={errors.title} />
+                  error={errors.degree} />
                 <TextFieldGroup
-                  placeholder="Location"
-                  name="location"
-                  value={location}
+                  placeholder="* Field of Study"
+                  name="fieldofstudy"
+                  value={fieldofstudy}
                   onChange={onChange}
-                  error={errors.location} />
+                  error={errors.fieldofstudy} />
                 <h6>From Date</h6>
                 <TextFieldGroup
                   type="date"
@@ -115,9 +115,9 @@ class AddExperience extends PureComponent {
                          onChange={onCheck}
                          id="current" />
                   <label className="form-check-label"
-                         htmlFor="current">Current</label>
+                         htmlFor="current">Current Job</label>
                 </div>
-                <TextAreaFieldGroup placeholder="Job Description"
+                <TextAreaFieldGroup placeholder="Program Description"
                                     name="description"
                                     value={description}
                                     onChange={onChange}
@@ -139,4 +139,4 @@ const marStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(marStateToProps, {addExperience})(withRouter(AddExperience));
+export default connect(marStateToProps, {addEducation})(withRouter(AddEducation));
