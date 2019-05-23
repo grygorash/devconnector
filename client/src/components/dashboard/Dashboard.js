@@ -38,8 +38,8 @@ Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(marStateToProps, {getCurrentProfile})(lifecycle(methods)(Dashboard));
+export default connect(mapStateToProps, {getCurrentProfile})(lifecycle(methods)(Dashboard));

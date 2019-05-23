@@ -81,8 +81,8 @@ PostFeed.propTypes = {
   addUnlike: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(marStateToProps, {deletePost, addLike, addUnlike})(PostFeed);
+export default connect(mapStateToProps, {deletePost, addLike, addUnlike})(PostFeed);

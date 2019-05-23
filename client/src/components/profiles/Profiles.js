@@ -38,8 +38,8 @@ Profiles.propTypes = {
   profile: PropTypes.object.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(marStateToProps, {getProfiles})(lifecycle(methods)(Profiles));
+export default connect(mapStateToProps, {getProfiles})(lifecycle(methods)(Profiles));

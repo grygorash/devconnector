@@ -52,7 +52,8 @@ CommentFeed.propTypes = {
   deleteComment: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth
 });
-export default connect(marStateToProps, {deleteComment})(CommentFeed);
+
+export default connect(mapStateToProps, {deleteComment})(CommentFeed);

@@ -46,9 +46,9 @@ AuthLinks.propTypes = {
   clearErrors: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
 
-export default connect(marStateToProps, {logoutUser, clearCurrentProfile, clearErrors})(withRouter(AuthLinks));
+export default connect(mapStateToProps, {logoutUser, clearCurrentProfile, clearErrors})(withRouter(AuthLinks));

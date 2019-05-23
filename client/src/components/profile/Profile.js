@@ -64,8 +64,8 @@ class Profile extends PureComponent {
   }
 }
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(marStateToProps, {getProfileByHandle})(withRouter(Profile));
+export default connect(mapStateToProps, {getProfileByHandle})(withRouter(Profile));

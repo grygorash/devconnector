@@ -63,9 +63,9 @@ class PostForm extends PureComponent {
   }
 }
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors
 });
 
-export default connect(marStateToProps, {addPost})(PostForm);
+export default connect(mapStateToProps, {addPost})(PostForm);

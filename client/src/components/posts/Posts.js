@@ -32,8 +32,8 @@ Posts.propTypes = {
   getPosts: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   post: state.post
 });
 
-export default connect(marStateToProps, {getPosts})(lifecycle(methods)(Posts));
+export default connect(mapStateToProps, {getPosts})(lifecycle(methods)(Posts));

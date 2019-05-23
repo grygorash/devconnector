@@ -19,8 +19,8 @@ WithoutProfile.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(marStateToProps)(WithoutProfile);
+export default connect(mapStateToProps)(WithoutProfile);

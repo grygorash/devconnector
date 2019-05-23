@@ -41,8 +41,8 @@ WithProfile.propTypes = {
   clearErrors: PropTypes.func.isRequired
 };
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(marStateToProps, {deleteAccount, clearErrors})(WithProfile);
+export default connect(mapStateToProps, {deleteAccount, clearErrors})(WithProfile);

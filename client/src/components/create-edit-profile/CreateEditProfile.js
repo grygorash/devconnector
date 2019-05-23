@@ -22,6 +22,7 @@ class CreateEditProfile extends PureComponent {
   };
 
   state = {
+    data: false,
     displaySocialInputs: false,
     handle: '',
     company: '',
@@ -45,42 +46,44 @@ class CreateEditProfile extends PureComponent {
     }
   }
 
-  // @TODO
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.profile.profile &&
       Object.keys(nextProps.profile.profile).length > 0 &&
       nextProps.location.pathname === '/create-profile') {
       nextProps.history.push('/edit-profile');
     }
 
-    if (nextProps.profile.profile) {
+    if (prevState.data === false && nextProps.profile.profile) {
       const {handle, company, website, location, status, skills, githubusername, bio, social} = nextProps.profile.profile;
 
       // Set component field state
-      this.setState({
-                      handle: handle ? handle : '',
-                      company: company ? company : '',
-                      website: website ? website : '',
-                      location: location ? location : '',
-                      status: status ? status : '',
-                      skills: skills ? skills.join(',') : '',
-                      githubusername: githubusername ? githubusername : '',
-                      bio: bio ? bio : '',
-                      twitter: social && social.twitter ? social.twitter : '',
-                      facebook: social && social.facebook ? social.facebook : '',
-                      linkedin: social && social.linkedin ? social.linkedin : '',
-                      youtube: social && social.youtube ? social.youtube : '',
-                      instagram: social && social.instagram ? social.instagram : '',
-                    });
+      return {
+        data: true,
+        handle: handle ? handle : '',
+        company: company ? company : '',
+        website: website ? website : '',
+        location: location ? location : '',
+        status: status ? status : '',
+        skills: skills ? skills.join(',') : '',
+        githubusername: githubusername ? githubusername : '',
+        bio: bio ? bio : '',
+        twitter: social && social.twitter ? social.twitter : '',
+        facebook: social && social.facebook ? social.facebook : '',
+        linkedin: social && social.linkedin ? social.linkedin : '',
+        youtube: social && social.youtube ? social.youtube : '',
+        instagram: social && social.instagram ? social.instagram : '',
+      };
     }
+    return null;
   }
+
 
   onSubmit = e => {
     e.preventDefault();
     const {handle, company, website, location, status, skills, githubusername, bio, twitter, facebook, linkedin, youtube, instagram} = this.state;
-    const {history} = this.props;
+    const {history, createProfile} = this.props;
 
-    this.props.createProfile({handle, company, website, location, status, skills, githubusername, bio, twitter, facebook, linkedin, youtube, instagram}, history);
+    createProfile({handle, company, website, location, status, skills, githubusername, bio, twitter, facebook, linkedin, youtube, instagram}, history);
   };
 
   onChange = ({target}) => {
@@ -247,9 +250,9 @@ class CreateEditProfile extends PureComponent {
   }
 }
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   profile: state.profile,
   errors: state.errors
 });
 
-export default connect(marStateToProps, {createProfile, getCurrentProfile, clearErrors})(withRouter(CreateEditProfile));
+export default connect(mapStateToProps, {createProfile, getCurrentProfile, clearErrors})(withRouter(CreateEditProfile));

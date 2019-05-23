@@ -129,9 +129,9 @@ class AddEducation extends PureComponent {
   }
 }
 
-const marStateToProps = state => ({
+const mapStateToProps = state => ({
   profile: state.profile,
   errors: state.errors
 });
 
-export default connect(marStateToProps, {addEducation})(withRouter(AddEducation));
+export default connect(mapStateToProps, {addEducation})(withRouter(AddEducation));
