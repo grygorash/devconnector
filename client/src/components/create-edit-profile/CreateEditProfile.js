@@ -22,7 +22,6 @@ class CreateEditProfile extends PureComponent {
   };
 
   state = {
-    data: false,
     displaySocialInputs: false,
     handle: '',
     company: '',
@@ -39,13 +38,6 @@ class CreateEditProfile extends PureComponent {
     instagram: ''
   };
 
-  componentDidMount() {
-    this.props.getCurrentProfile();
-    if (Object.keys(this.props.errors).length > 0) {
-      this.props.clearErrors(this.props.errors);
-    }
-  }
-
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.profile.profile &&
       Object.keys(nextProps.profile.profile).length > 0 &&
@@ -53,12 +45,12 @@ class CreateEditProfile extends PureComponent {
       nextProps.history.push('/edit-profile');
     }
 
-    if (prevState.data === false && nextProps.profile.profile) {
-      const {handle, company, website, location, status, skills, githubusername, bio, social} = nextProps.profile.profile;
+    if (nextProps.profile.profile && nextProps.profile.profile._id !== prevState.id) {
+      const {_id, handle, company, website, location, status, skills, githubusername, bio, social} = nextProps.profile.profile;
 
       // Set component field state
       return {
-        data: true,
+        id: _id,
         handle: handle ? handle : '',
         company: company ? company : '',
         website: website ? website : '',
@@ -77,6 +69,12 @@ class CreateEditProfile extends PureComponent {
     return null;
   }
 
+  componentDidMount() {
+    this.props.getCurrentProfile();
+    if (Object.keys(this.props.errors).length > 0) {
+      this.props.clearErrors(this.props.errors);
+    }
+  }
 
   onSubmit = e => {
     e.preventDefault();

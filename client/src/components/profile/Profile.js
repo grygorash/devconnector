@@ -16,6 +16,8 @@ class Profile extends PureComponent {
     getProfileByHandle: PropTypes.func.isRequired
   };
 
+  state = {};
+
   // -------------------------
   // @TODO
   componentWillReceiveProps(nextProps) {
