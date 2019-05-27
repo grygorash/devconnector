@@ -1,0 +1,8 @@
+{
+  "name": "Dev-Connector",
+  "description": "",
+  "repository": "https://github.com/grygorash/devconnector",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}
