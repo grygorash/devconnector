@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
@@ -47,75 +47,70 @@ if (localStorage.jwtToken) {
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <Header />
-            <Route
-              exact
-              path="/"
-              component={Landing} />
-            <section className="container">
-              <Route
-                path="/login"
-                component={Login} />
-              <Route
-                path="/register"
-                component={Register} />
-              <Route
-                path="/profiles"
-                component={Profiles} />
-              <Route
-                path="/profile/:handle"
-                component={Profile} />
-              <Switch>
-                <PrivateRoute
-                  path="/dashboard"
-                  component={Dashboard} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  path="/create-profile"
-                  component={CreateEditProfile} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  path="/edit-profile"
-                  component={CreateEditProfile} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  path="/add-experience"
-                  component={AddExperience} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  path="/add-education"
-                  component={AddEducation} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  path="/feed"
-                  component={Posts} />
-              </Switch>
-              <Switch>
-                <PrivateRoute
-                  path="/post/:id"
-                  component={Post} />
-              </Switch>
-              <Route
-                path="/not-found"
-                component={NotFound} />
-            </section>
-            <Footer />
-          </div>
-        </Router>
-      </Provider>
-    );
-  }
-}
+const App = () =>
+  <Provider store={store}>
+    <Router>
+      <div className="App">
+        <Header />
+        <Route
+          exact
+          path="/"
+          component={Landing} />
+        <section className="container">
+          <Route
+            path="/login"
+            component={Login} />
+          <Route
+            path="/register"
+            component={Register} />
+          <Route
+            path="/profiles"
+            component={Profiles} />
+          <Route
+            path="/profile/:handle"
+            component={Profile} />
+          <Switch>
+            <PrivateRoute
+              path="/dashboard"
+              component={Dashboard} />
+          </Switch>
+          <Switch>
+            <PrivateRoute
+              path="/create-profile"
+              component={CreateEditProfile} />
+          </Switch>
+          <Switch>
+            <PrivateRoute
+              path="/edit-profile"
+              component={CreateEditProfile} />
+          </Switch>
+          <Switch>
+            <PrivateRoute
+              path="/add-experience"
+              component={AddExperience} />
+          </Switch>
+          <Switch>
+            <PrivateRoute
+              path="/add-education"
+              component={AddEducation} />
+          </Switch>
+          <Switch>
+            <PrivateRoute
+              path="/feed"
+              component={Posts} />
+          </Switch>
+          <Switch>
+            <PrivateRoute
+              path="/post/:id"
+              component={Post} />
+          </Switch>
+          <Route
+            path="/not-found"
+            component={NotFound} />
+        </section>
+        <Footer />
+      </div>
+    </Router>
+  </Provider>;
 
 export default App;
